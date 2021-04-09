@@ -21,6 +21,6 @@ app.use('/api/anecdotes', anecdoteRouter);
 
 app.use('/api/health', (request, response) => {
   response.send('ok');
-})
+});
 
 module.exports = app;
