@@ -1,0 +1,27 @@
+name: Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: npm install
+        if: ${{ github.event_name == 'pull_request' }}
+        run: npm install
+      - name: lint
+        if: ${{ github.event_name == 'pull_request' }}
+        run: npm run eslint .
+      - name: component and unit tests
+        if: ${{ github.event_name == 'pull_request' }}
+        run: npm run test
