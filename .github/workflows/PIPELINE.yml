@@ -21,7 +21,7 @@ jobs:
         run: npm install
       - name: lint
         if: ${{ github.event_name == 'pull_request' }}
-        run: npm run eslint .
+        run: npm run lint
       - name: component and unit tests
         if: ${{ github.event_name == 'pull_request' }}
         run: npm run test
